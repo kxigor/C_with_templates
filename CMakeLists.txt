@@ -23,10 +23,6 @@ option(ENABLE_FORMAT_CHECK "Register the Clang-Format check as a CTest target." 
 option(ENABLE_TIDY_CHECK "Register the Clang-Tidy check as a CTest target." ON)
 option(ENABLE_COVERAGE "Enable code coverage generation (GCOV/LCOV)." OFF)
 
-set(ENABLE_UNITTESTS ON CACHE BOOL "Enable unit tests" FORCE)
-set(ENABLE_FORMAT_CHECK ON CACHE BOOL "Enable format check" FORCE)
-set(ENABLE_TIDY_CHECK ON CACHE BOOL "Enable tidy check" FORCE)
-
 if(NOT ENABLE_TESTING)
   set(ENABLE_UNITTESTS OFF CACHE BOOL "Unit tests requires ENABLE_TESTING=ON." FORCE)
   set(ENABLE_FORMAT_CHECK OFF CACHE BOOL "Format check requires ENABLE_TESTING=ON." FORCE)
@@ -42,20 +38,17 @@ include(ProjectSanitizers)
 include(ProjectCoverage)
 
 # =========================================================
-# 3. SUBDIRECTORIES
+# 3. SUBPROJECTS
+# =========================================================
+add_subdirectory(third_party/LRK)
+
+# =========================================================
+# 4. SUBDIRECTORIES
 # =========================================================
 add_subdirectory(src)
 add_subdirectory(app)
 
-# =========================================================
-# 4. TESTS
-# =========================================================
 if(ENABLE_TESTING)
   enable_testing()
   add_subdirectory(tests)
 endif()
-
-# =========================================================
-# 5. SUBPROJECTS
-# =========================================================
-add_subdirectory(third_party/LRK)
