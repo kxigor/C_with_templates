@@ -8,7 +8,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Можно добавить и другие, например ci-coverage
         preset: [dev-debug-asan, ci-tests-release]
 
     steps:
@@ -18,10 +17,13 @@ jobs:
 
     - name: Install dependencies
       run: |
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
         sudo apt-get update
-        sudo apt-get install -y ninja-build
+        sudo apt-get install -y ninja-build g++-14
 
     - name: Configure CMake
+      env:
+        CXX: g++-14
       run: cmake --preset ${{ matrix.preset }}
 
     - name: Build
