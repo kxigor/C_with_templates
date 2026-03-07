@@ -29,8 +29,5 @@ jobs:
     - name: Build
       run: cmake --build --preset ${{ matrix.preset }}
 
-    - name: Debug CMake Cache
-      run: cat build/ci-tests-release/CTestTestfile.cmake
-
     - name: Test
       run: ctest --preset ${{ matrix.preset }}
