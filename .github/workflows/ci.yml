@@ -1,33 +1,28 @@
-name: C++ CI (Fedora)
+name: C++ CI (Presets)
 
 on: [push, pull_request]
 
 jobs:
   build-and-test:
-    # Оставляем ubuntu-latest как хост, но запускаем всё в контейнере
     runs-on: ubuntu-latest
-    container:
-      image: fedora:41 # Или fedora:rawhide для самого свежего железа
+    strategy:
+      fail-fast: false
+      matrix:
+        # Можно добавить и другие, например ci-coverage
+        preset: [dev-debug-asan, ci-tests-release]
 
     steps:
-    - name: Install dependencies
-      run: |
-        dnf install -y \
-          gcc-c++ \
-          cmake \
-          ninja-build \
-          git \
-          libstdc++-devel
-
     - uses: actions/checkout@v4
       with:
         submodules: recursive
 
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ninja-build
+
     - name: Configure CMake
       run: cmake --preset ${{ matrix.preset }}
-      strategy:
-        matrix:
-          preset: [dev-debug-asan, ci-tests-release]
 
     - name: Build
       run: cmake --build --preset ${{ matrix.preset }}
