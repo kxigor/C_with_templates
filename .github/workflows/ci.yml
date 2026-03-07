@@ -30,7 +30,7 @@ jobs:
       run: cmake --build --preset ${{ matrix.preset }}
 
     - name: Debug CMake Cache
-      run: grep "ENABLE_TESTING" build/ci-tests-release/CMakeCache.txt
+      run: cat build/ci-tests-release/CTestTestfile.cmake
 
     - name: Test
       run: ctest --preset ${{ matrix.preset }}
