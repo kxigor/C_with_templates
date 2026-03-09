@@ -83,6 +83,16 @@ jobs:
       - name: Install Ninja
         run: sudo apt-get install -y ninja-build
 
+      - name: Install GoogleTest
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtest-dev
+          # В Ubuntu пакет содержит только исходники, их нужно собрать
+          cd /usr/src/googletest
+          sudo cmake .
+          sudo cmake --build .
+          sudo cmake --install .
+
       - name: Verify toolchain
         run: |
           echo "=== Compiler ==="
@@ -97,7 +107,9 @@ jobs:
         run: |
           cmake --preset ${{ matrix.preset }} \
             -DCMAKE_C_COMPILER=${{ matrix.cc }} \
-            -DCMAKE_CXX_COMPILER=${{ matrix.cxx }}
+            -DCMAKE_CXX_COMPILER=${{ matrix.cxx }} \
+            -DCMAKE_C_FLAGS="-Wno-unknown-warning-option -Wno-unused-command-line-argument" \
+            -DCMAKE_CXX_FLAGS="-Wno-unknown-warning-option -Wno-unused-command-line-argument"
 
       - name: Build
         run: cmake --build --preset ${{ matrix.preset }}
