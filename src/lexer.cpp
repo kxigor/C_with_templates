@@ -7,7 +7,7 @@ namespace scy {
 
 namespace {
 // clang-format off
-const UmapT<StringView, TokenType> kKeywordsMap = {
+const UmapT<StringViewT, TokenType> kKeywordsMap = {
     {"if",      TokenType::If     },
     {"else",    TokenType::Else   },
     {"void",    TokenType::Void   },
@@ -67,7 +67,7 @@ void Lexer::skip_whitespace() noexcept {
 
 Token Lexer::make_token(TokenType type) {
   // clang-format off
-  const StringView kLexem = source_.substr(start_, cursor_ - start_);
+  const StringViewT kLexem = source_.substr(start_, cursor_ - start_);
 
   const SourceLocation kLocation = {
       .line   = location_.line, 
@@ -87,7 +87,7 @@ Token Lexer::identifier() {
     advance();
   }
 
-  const StringView kText = source_.substr(start_, cursor_ - start_);
+  const StringViewT kText = source_.substr(start_, cursor_ - start_);
 
   if (auto keyword = kKeywordsMap.find(kText); keyword != kKeywordsMap.end()) {
     return make_token(keyword->second);

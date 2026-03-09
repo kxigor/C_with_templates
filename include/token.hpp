@@ -52,7 +52,7 @@ struct SourceLocation {
 
 struct Token {
   TokenType type;
-  StringView lexem;
+  StringViewT lexem;
   SourceLocation location;
 };
 

@@ -7,7 +7,7 @@ namespace scy {
 
 class Lexer {
  public:
-  explicit Lexer(StringView source) : source_(source) {}
+  explicit Lexer(StringViewT source) : source_(source) {}
 
   VectorT<Token> tokenize();
 
@@ -21,12 +21,11 @@ class Lexer {
 
   Token next_token();
   Token make_token(TokenType type);
-  Token error_token(StringView message);
 
   Token number();
   Token identifier();
 
-  StringView source_;
+  StringViewT source_;
 
   SourceLocation location_{.line = 1, .column = 1};
 

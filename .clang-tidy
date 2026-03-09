@@ -21,7 +21,8 @@ Checks: >
   -llvm-header-guard,
   -bugprone-easily-swappable-parameters,
   -portability-avoid-pragma-once,
-  -readability-identifier-length
+  -readability-identifier-length,
+  -cppcoreguidelines-avoid-const-or-ref-data-members
 WarningsAsErrors: '*'
 
 CheckOptions:
@@ -40,7 +41,7 @@ CheckOptions:
   - key: readability-identifier-naming.EnumConstantCase
     value: 'CamelCase'
   - key: readability-identifier-naming.FunctionCase
-    value: 'CamelCase'
+    value: 'lower_case'
   - key: readability-identifier-naming.MemberCase
     value: 'lower_case'
   - key: readability-identifier-naming.MethodCase

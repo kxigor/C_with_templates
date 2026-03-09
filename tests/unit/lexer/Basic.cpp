@@ -7,7 +7,7 @@ namespace scy::test {
 class LexerTest : public ::testing::Test {
  protected:
   void AssertToken(const Token& token, TokenType expected_type,
-                   StringView expected_lexem, uint32_t line, uint32_t col) {
+                   StringViewT expected_lexem, uint32_t line, uint32_t col) {
     EXPECT_EQ(token.type, expected_type)
         << "Mismatched type for lexem: " << expected_lexem;
     EXPECT_EQ(token.lexem, expected_lexem);
@@ -88,7 +88,7 @@ TEST_F(LexerTest, WhitespaceAndUnknown) {
 }
 
 TEST_F(LexerTest, FullProgram) {
-  StringView code =
+  StringViewT code =
       "int main() {\n"
       "  if (x == 10) {\n"
       "    print x;\n"
