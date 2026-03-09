@@ -1,11 +1,8 @@
-add_library(scy
-  lexer.cpp
-)
-
-target_link_libraries(scy
-  PRIVATE
+add_gtest(BasicLexerTest
+  SOURCES Basic.cpp
+  LIBRARIES 
+    scy
     project_options
-    project_sanitizers
     project_coverage
 )
 

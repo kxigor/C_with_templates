@@ -40,7 +40,20 @@ include(ProjectCoverage)
 # =========================================================
 # 3. SUBPROJECTS
 # =========================================================
+set(_BACKUP_UNITTESTS ${ENABLE_UNITTESTS})
+set(_BACKUP_FORMAT    ${ENABLE_FORMAT_CHECK})
+set(_BACKUP_TIDY      ${ENABLE_TIDY_CHECK})
+
+# 2. Выключаем тестирование для дочернего проекта локально
+# Используем обычный set (без CACHE), чтобы LRK увидел это значение
+set(ENABLE_TESTING OFF)
 add_subdirectory(third_party/LRK)
+unset(ENABLE_TESTING) # Убираем локальную переменную, чтобы вернуться к глобальной
+
+# 3. ПРИНУДИТЕЛЬНО возвращаем наши настройки в кэш
+set(ENABLE_UNITTESTS ${_BACKUP_UNITTESTS} CACHE BOOL "" FORCE)
+set(ENABLE_FORMAT_CHECK ${_BACKUP_FORMAT} CACHE BOOL "" FORCE)
+set(ENABLE_TIDY_CHECK ${_BACKUP_TIDY} CACHE BOOL "" FORCE)
 
 # =========================================================
 # 4. SUBDIRECTORIES

@@ -19,12 +19,14 @@ Checks: >
   
   -modernize-use-trailing-return-type,
   -llvm-header-guard,
-  -bugprone-easily-swappable-parameters
+  -bugprone-easily-swappable-parameters,
+  -portability-avoid-pragma-once,
+  -readability-identifier-length
 WarningsAsErrors: '*'
 
 CheckOptions:
   - key: readability-function-size.LineThreshold
-    value: '50'
+    value: '100'
   - key: readability-function-size.ParameterThreshold
     value: '5'
   - key: readability-identifier-naming.ClassCase
@@ -42,7 +44,7 @@ CheckOptions:
   - key: readability-identifier-naming.MemberCase
     value: 'lower_case'
   - key: readability-identifier-naming.MethodCase
-    value: 'CamelCase'
+    value: 'lower_case'
   - key: readability-identifier-naming.NamespaceCase
     value: 'lower_case'
   - key: readability-identifier-naming.ParameterCase

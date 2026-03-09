@@ -123,7 +123,7 @@
       "name": "dev-debug-asan",
       "configurePreset": "dev-debug-asan",
       "output": { "outputOnFailure": true },
-      "execution": { "stopOnFailure": true }
+      "execution": { "stopOnFailure": false }
     },
     {
       "name": "dev-debug-tsan",

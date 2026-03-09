@@ -1,7 +1,5 @@
 #pragma once
 
-#include <vector>
-
 #include "config.hpp"
 #include "token.hpp"
 
@@ -11,15 +9,15 @@ class Lexer {
  public:
   explicit Lexer(StringView source) : source_(source) {}
 
-  std::vector<Token> tokenize();
+  VectorT<Token> tokenize();
 
  private:
-  bool is_at_end() const;
-  char peek() const;
-  char peek_next() const;
-  char advance();
+  [[nodiscard]] bool is_at_end() const noexcept;
+  [[nodiscard]] SymT peek() const noexcept;
+  [[nodiscard]] SymT peek_next() const noexcept;
+  SymT advance() noexcept;
 
-  void skip_whitespace();
+  void skip_whitespace() noexcept;
 
   Token next_token();
   Token make_token(TokenType type);
@@ -29,10 +27,11 @@ class Lexer {
   Token identifier();
 
   StringView source_;
-  SourceLocation location_;
 
-  std::size_t cursor_{0};
-  std::size_t start_{0};
+  SourceLocation location_{.line = 1, .column = 1};
+
+  PosT cursor_{0};
+  PosT start_{0};
 };
 
 }  // namespace scy

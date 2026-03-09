@@ -45,8 +45,8 @@ enum class TokenType : std::uint8_t {
 // clang-format on
 
 struct SourceLocation {
-  std::uint32_t line{};
-  std::uint32_t column{};
+  PosT line{};
+  PosT column{};
 };
 
 struct Token {
