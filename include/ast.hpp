@@ -18,6 +18,8 @@ using StmtPtr = UniquePtrT<Statement>;
 using DeclPtr = UniquePtrT<Declaration>;
 
 /*======================= Expressions ========================*/
+// TODO: нужны конструкторы
+
 struct NumberExpr {
   Token value;
 };
@@ -72,6 +74,7 @@ struct PrintStmt {
   ExprPtr expression;
 };
 
+// Убрать токен
 struct ReturnStmt {
   Token keyword;
   OptionalT<ExprPtr> value;

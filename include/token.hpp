@@ -55,4 +55,7 @@ struct Token {
   SourceLocation location;
 };
 
+// TODO: создать структуру для типов
+// TODO: создать структуру lexem и loacation
+
 };  // namespace scy

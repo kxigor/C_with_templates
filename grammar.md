@@ -10,7 +10,6 @@ block        → '{' statement* '}'
 statement    → var_decl | if_stmt | return_stmt | print_stmt | expr_stmt | block
 if_stmt      → 'if' '(' expression ')' statement ('else' statement)?
 return_stmt  → 'return' expression? ';'
-print_stmt   → 'print' expression ';'
 expr_stmt    → expression ';'
 expression   → assignment
 assignment   → IDENTIFIER '=' assignment | equality
@@ -22,3 +21,6 @@ primary      → NUMBER | IDENTIFIER | '(' expression ')' | call
 call         → IDENTIFIER '(' arguments? ')'
 arguments    → expression (',' expression)*
 ```
+
+Добавить IDENTIFIER
+Добавить NUMBER
